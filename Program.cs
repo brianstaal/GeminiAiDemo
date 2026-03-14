@@ -3,7 +3,6 @@ using Spectre.Console;
 
 AnsiConsole.Clear();
 
-// 1. Show Banner
 AnsiConsole.Write(
     new FigletText("Gemini AI Demo App")
         .LeftJustified()
@@ -31,7 +30,7 @@ var outputFormatFile = Path.Combine(rootDir, "AppData", "output.json");
 
 var instructionContent = File.ReadAllText(instructionFile);
 
-// Add the pfdFile + outputFormatFile gemini and give the instructionContent as the system prompt. Then get the response and write it to the console.
+// Todo: Add the pfdFile + outputFormatFile gemini and give the instructionContent as the system prompt. Then get the response and write it to the console.
 
 
 
