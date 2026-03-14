@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/schemas/output.schema.json",
+  "title": "InvoiceExtract Root Schema",
+  "type": "object",
+  "required": [
+    "InvoiceExtract"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "InvoiceExtract": {
+      "type": "object",
+      "required": [
+        "Seller",
+        "DocumentType",
+        "InvoiceNumber",
+        "InvoiceDate",
+        "DueDate",
+        "Currency",
+        "SubTotal",
+        "TaxAmount",
+        "TotalAmount",
+        "PaymentLine"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "Seller": {
+          "type": "object",
+          "required": [
+            "Name",
+            "Address",
+            "ZipCode",
+            "City",
+            "Country",
+            "CvrNumber",
+            "PhoneNumber",
+            "Email",
+            "BankName",
+            "BankAccountNumber",
+            "BankIbanNumber",
+            "BankSwiftCode"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Name": { "type": "string" },
+            "Address": { "type": "string" },
+            "ZipCode": { "type": "string" },
+            "City": { "type": "string" },
+            "Country": { "type": "string" },
+            "CvrNumber": { "type": "string" },
+            "PhoneNumber": { "type": "string" },
+            "Email": { "type": "string", "format": "email" },
+            "BankName": { "type": "string" },
+            "BankAccountNumber": { "type": "string" },
+            "BankIbanNumber": { "type": "string" },
+            "BankSwiftCode": { "type": "string" }
+          }
+        },
+        "DocumentType": { "type": "string" },
+        "InvoiceNumber": { "type": "string" },
+        "InvoiceDate": { "type": "string", "format": "date-time" },
+        "DueDate": { "type": "string", "format": "date-time" },
+        "Currency": { "type": "string" },
+        "SubTotal": { "type": "number" },
+        "TaxAmount": { "type": "number" },
+        "TotalAmount": { "type": "number" },
+        "PaymentLine": { "type": "string" }
+      }
+    }
+  }
+}
