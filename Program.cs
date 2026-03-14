@@ -57,3 +57,9 @@ var responseText = response.Text;
 Console.WriteLine(responseText);
 
 AnsiConsole.MarkupLine("[green]DONE![/]");
+
+// Make summery
+var usedModel = response.ModelVersion;
+var usedTokens = response.UsageMetadata?.TotalTokenCount ?? 0;
+AnsiConsole.MarkupLine($"[blue]Model used:[/] {usedModel}");
+AnsiConsole.MarkupLine($"[blue]Tokens used:[/] {usedTokens}");

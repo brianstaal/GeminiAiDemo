@@ -22,3 +22,13 @@ Set the model you wish to use
 ```
 dotnet run
 ```
+
+## Note
+
+At the time of writing this demo, the following Gemini models was tested and the token usage for the demo data was measured.
+The token usage may vary based on the input data and the model used.
+
+#### Total tokens to extract data from the invoicesample.pdf
+- gemini-3.1-flash-lite-preview = 1574 tokens
+- gemini-3-flash-preview = 3611 tokens
+- gemini-3.1-pro-preview = 5144 tokens
