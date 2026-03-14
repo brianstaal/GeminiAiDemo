@@ -1,7 +1,7 @@
-﻿using Google.GenAI;
+using Google.GenAI;
 using Microsoft.Extensions.Configuration;
 using Spectre.Console;
-using System.Text;
+using Google.GenAI.Types;
 
 AnsiConsole.Clear();
 
@@ -16,7 +16,6 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
     .AddEnvironmentVariables()
     .Build();
 
-
 var geminiApiKey = configuration["GoogleGemini:ApiKey"];
 var geminiModel = configuration["GoogleGemini:Model"];
 
@@ -27,24 +26,31 @@ if (string.IsNullOrEmpty(geminiApiKey) || string.IsNullOrEmpty(geminiModel))
 }
 
 var rootDir = AppContext.BaseDirectory;
-//var instructionFile = Path.Combine(rootDir, "AppData", "instructions.txt");
 var pdfFile = Path.Combine(rootDir, "AppData", "Beierholm.pdf");
 var outputSchema = Path.Combine(rootDir, "AppData", "output.schema.json");
 
-//var sb = new StringBuilder();
-//sb.Append(System.IO.File.ReadAllText(instructionFile));
-
 // Create a new Gemini client
 var client = new Client(apiKey:geminiApiKey);
+
+// Attach files
 var pdfFileRef = await client.Files.UploadAsync(filePath: pdfFile);
 var outputRef = await client.Files.UploadAsync(filePath: outputSchema);
 
-var response = await client.Models.GenerateContentAsync(model: geminiModel, contents: "Extract data from Beierholm.pdf by the given output.schema.json, and return a json");
+var response = await client.Models.GenerateContentAsync(
+    model: geminiModel,
+    contents: new Content
+    {
+        Parts =
+        [
+            Part.FromUri(pdfFileRef.Uri!, pdfFileRef.MimeType),
+            Part.FromUri(outputRef.Uri!, outputRef.MimeType),
+            Part.FromText("Extract data from Beierholm.pdf given the output.schema.json => return the json result")
+        ]
+    });
 
 var responseText = response.Text;
 Console.WriteLine(responseText);
 
-// Todo: Add the pfdFile + outputFormatFile gemini and give the instructionContent as the system prompt. Then get the response and write it to the console.
 
 
 
