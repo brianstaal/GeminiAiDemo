@@ -10,11 +10,15 @@ The demo show an example on how to give the AI a invoice PDF file and a schema t
 Login to https://aistudio.google.com/api-keys and create an API key
 
 ## Prerequisites
+```
 dotnet user-secrets init
 dotnet user-secrets set GoogleGemini:Token <your-google-gemini-token>
+```
 
 ## Update appsettings.json
 Set the model you wish to use
 
 ## Run the demo
+```
 dotnet run
+```
